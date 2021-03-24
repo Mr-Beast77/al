@@ -1,31 +1,29 @@
-name: aosp
+name: combined
 on:
   push:
   workflow_dispatch:
 jobs:
   job1:
-    name: aosp
+    name: combined
     runs-on: ubuntu-20.04
-    strategy:
-      fail-fast: false
-      matrix:
-        parts: [init, bootimage, api-stubs-docs, system-api-stubs-docs, test-api-stubs-docs, app_process, services, framework, framework-res, libandroid_runtime, libbinder, device/xiaomi/mido, vendor/xiaomi/mido]
     env:
-      parts: ${{ matrix.parts }}
       rclone_config: ${{ secrets.RCLONE_CONFIG }}
+      test: hi_working_fine
     continue-on-error: true
     steps:
     - uses: actions/checkout@v2
     - name: swap
       run: |
         ./swap
+    - name: test
+      run: |
+        echo $test
     - name: download ccache
+    - name: download ccache
+      continue-on-error: true
       run: |
         ./download_ccache
     - uses: rokibhasansagar/slimhub_actions@main
-    - name: parts
-      run: |
-        echo $parts
     - name: packages
       run: |
         ./packages &
@@ -33,6 +31,7 @@ jobs:
       run: |
         ./sync
     - name: build
+      continue-on-error: true
       run: |
         ./build
     - name: upload ccache
