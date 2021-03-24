@@ -8,16 +8,12 @@ jobs:
     runs-on: ubuntu-20.04
     env:
       rclone_config: ${{ secrets.RCLONE_CONFIG }}
-      test: hi_working_fine
     continue-on-error: true
     steps:
     - uses: actions/checkout@v2
     - name: swap
       run: |
         ./swap
-    - name: test
-      run: |
-        echo $test
     - name: download ccache
       continue-on-error: true
       run: |
