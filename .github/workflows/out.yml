@@ -20,4 +20,4 @@ jobs:
         ./packages &
     - name: build
       run: |
-        ./build2
+        ./build

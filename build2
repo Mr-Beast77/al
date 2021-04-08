@@ -20,6 +20,7 @@ time tar xf rom.tar.gz
 rm -rf rom.tar.gz
 
 cd /tmp/rom
+rm -rf .repo
 
 . build/envsetup.sh
 lunch aosp_mido-user
