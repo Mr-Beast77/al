@@ -18,6 +18,7 @@ url=https://roms.apon77.workers.dev/junk/compressed/rom.tar.gz
 time aria2c $url -x16 -s50 || time aria2c $url -x16 -s50
 time tar xf rom.tar.gz
 rm -rf rom.tar.gz
+rm -rf rom/.repo
 
 cd /tmp/rom
 url2=https://roms.apon77.workers.dev/junk/compressed/out.tar.gz
