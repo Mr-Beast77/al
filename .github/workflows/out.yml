@@ -1,10 +1,10 @@
-name: combined
+name: out
 on:
   push:
   workflow_dispatch:
 jobs:
   job1:
-    name: combined
+    name: out
     runs-on: ubuntu-20.04
     env:
       rclone_config: ${{ secrets.RCLONE_CONFIG }}
@@ -14,21 +14,10 @@ jobs:
     - name: swap
       run: |
         ./swap
-    - name: download ccache
-      continue-on-error: true
-      run: |
-        ./download_ccache
     - uses: rokibhasansagar/slimhub_actions@main
     - name: packages
       run: |
         ./packages &
-    - name: sync
-      run: |
-        ./sync
     - name: build
-      continue-on-error: true
       run: |
         ./build
-    - name: upload ccache
-      run: |
-        ./upload_ccache
